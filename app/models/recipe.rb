@@ -24,6 +24,15 @@ class Recipe < ActiveRecord::Base
     Recipe.all - out
   end
 
+  def find_allergens
+    @allergens = []
+    self.ingredientflags.each do |id|
+      @allergens << Ingredientflag.find(id).allergies.first.name
+    end
+    @allergens.uniq!
+    @allergens.length > 0 ? @allergens.join(", ") : "none"
+  end
+
   def flagged_ingredients
     @recipe_flags_ids = []
     @temp_ingredients = self.ingredients.downcase
