@@ -1,0 +1,31 @@
+<% content_for :javascript_includes do %>
+<%= javascript_include_tag 'jquery.raty.js','letsrate.js.'%>
+<% end %>
+
+<h2>Recommended Recipes</h2>
+<table>
+  <thead>
+    <tr>
+      <th><span class="glyphicon glyphicon-link"></span>Title</th>
+      <th>Category</th>
+      <th>Rating</th>
+      <th>Submittal Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%@filter_recipes.each do |recipe|%>
+      <tr>
+        <td><%=link_to recipe.title.titleize, recipe_path(recipe.id)%></td>
+        <td><%=recipe.category%></td>
+        <td><%if recipe.rates("title").count > 0%>
+             <%=recipe.average("title").avg.round(1)%><img src="/assets/star-on.png">
+            <%else%>
+              <%= rating_for recipe, "title", disable_after_rate: true %><%end%></td>
+        <td><%= recipe.created_at.month%>/<%= recipe.created_at.year%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

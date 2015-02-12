@@ -1,0 +1,32 @@
+
+<div class='container-fluid'>
+  <div class="row">
+    <div class="col-xs-2 col-sm-3">
+      <div class="sidebar">
+        <h3><%=@current_user.name ? @current_user.name.titleize + '\'s' : Your%> Account</h3>
+        <ul>
+          <li><a href="/dashboard"><span class="glyphicon glyphicon-dashboard"></span>Dashboard</a></li>
+          <li><strong><span class="glyphicon glyphicon-folder-open"></span>View/Edit Submitted Recipes</strong></li>
+          <li><a href = "recipes/new"><span class="glyphicon glyphicon-cutlery"></span>Submit New Recipe </li>
+          <li><a href=" /users/edit"><span class="glyphicon glyphicon-cog"></span>Account Info</a> </li>
+          <li><em>Current Allergies :</em>
+           <% @current_user.allergies.each do |allergy| %>
+            <em><%=allergy.name %></em>
+            <%end%></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  <div class="col-xs-10 col-sm-9">
+<h2><%=current_user.name ? current_user.name.titleize+' ' : You+' '%>Submitted Recipes</h2>
+  <div class='recipe_links'>
+    <ul>
+      <%@recipes.each do |recipe|%>
+      <li><%= link_to edit_recipe_path(recipe), class: "btn btn-default" do %>  <i class="glyphicon glyphicon-edit">Edit</i><%end%>
+        <%=link_to recipe.title.titleize, recipe_path(recipe.id)%></li>
+      <%end%>
+    </ul>
+  </div>
+</div>
+

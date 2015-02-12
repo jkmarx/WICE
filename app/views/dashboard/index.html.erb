@@ -1,0 +1,25 @@
+
+<div class='container-fluid height-full'>
+  <div class="row">
+    <div class="col-xs-2 col-sm-3">
+      <div class="sidebar">
+        <h3><%=@current_user.name ? @current_user.name.titleize + '\'s' : Your%> Account</h3>
+        <ul>
+          <li><strong><span class="glyphicon glyphicon-dashboard"></span>Dashboard</strong></li>
+          <li><a href="users/<%=current_user.id%>/recipes"><span class="glyphicon glyphicon-folder-open"></span>View/Edit Submitted Recipes</a></li>
+          <li><a href = "users/<%=current_user.id%>/recipes/new"><span class="glyphicon glyphicon-cutlery"></span>Submit New Recipe </li>
+          <li><a href=" /users/edit"><span class="glyphicon glyphicon-cog"></span>Account Info</a> </li>
+          <li><em>Current Allergies :</em>
+           <% @current_user.allergies.each do |allergy| %>
+            <em><%=allergy.name %></em>
+            <%end%></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-xs-10 col-sm-9">
+      <%=render "recipes/recommend"%>
+    </div>
+  </div>
+</div>
+

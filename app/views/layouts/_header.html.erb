@@ -1,0 +1,16 @@
+<header class="navbar">
+  <div class="container">
+    <h2>WICE, <span style="font-size:15px !important;">What I Can Eat App</span></h2>
+    <ul class="nav nav-tabs navbar-nav navbar-right">
+      <li><%= link_to "Home ", welcome_index_path %></li>
+      <% if user_signed_in? %>
+          <li><%= link_to "Dashboard", dashboard_index_path %></li>
+          <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+      <% else %>
+        <li>
+        <%= link_to "Login", welcome_index_path  %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</header>

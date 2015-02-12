@@ -1,0 +1,66 @@
+<div class='container-fluid'>
+  <div class="row">
+    <div class="col-xs-2 col-sm-3">
+      <div class="sidebar">
+        <h3><%=@current_user.name ? @current_user.name.titleize + '\'s' : Your%> Account</h3>
+        <ul>
+          <li><a href="/dashboard"><span class="glyphicon glyphicon-dashboard"></span>Dashboard</a></li>
+          <li><a href="<%=current_user.id%>/recipes"><span class="glyphicon glyphicon-folder-open"></span>View/Edit Submitted Recipes</a></li>
+          <li><a href = "<%=current_user.id%>/recipes/new"><span class="glyphicon glyphicon-cutlery"></span>Submit New Recipe</a> </li>
+          <li> <strong><span class="glyphicon glyphicon-cog"></span>Account Info</strong> </li>
+          <li>Current Allergies :
+           <% @current_user.allergies.each do |allergy| %>
+            <%=allergy.name %>
+            <%end%></li>
+        </ul>
+      </div>
+    </div>
+<div class="col-xs-10 col-sm-9">
+<h2>Edit <%=current_user.name%>'s Account</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true,size: 40; %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name,size: 40; %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Update Password" %><br />
+    <%= f.password_field :password, autocomplete: "off", placeholder: "Leave blank if no updates",size: 40; %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off",size: 40; %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Confirm Current Password" %> <br />
+    <%= f.password_field :current_password, autocomplete: "off",placeholder: "Current Password required for changes.", size: 40; %>
+  </div>
+
+  <% Allergy.all.each do |allergy| %>
+        <%= check_box_tag "user[allergy_ids][]", allergy.id, current_user.allergies.include?(allergy) %>
+       <div class="check_name"> <%= allergy.name %></div>
+    <% end %>
+
+  <div class="actions">
+    <%= f.submit "Save Account Updates",class: 'btn btn-primary btn-lg' %>
+  </div>
+<% end %>
+<h3>Cancel Account</h3>
+
+<div class='btn btn-warning btn-lg'> <%= link_to 'CANCEL Account', registration_path(resource_name), method: :delete, data: { confirm: 'Are you sure?' } %></div>
+
+</div>

@@ -1,0 +1,30 @@
+<div class='container-fluid height-full'>
+  <div class="row">
+    <div class="col-xs-2 col-sm-3">
+      <div class="sidebar">
+        <h3><%=current_user.name ? current_user.name.titleize + '\'s' : Your%> Account</h3>
+        <ul>
+          <li><a href="/dashboard"><span class="glyphicon glyphicon-dashboard"></span>Dashboard</a></li>
+          <li><a href="/users/<%=current_user.id%>/recipes"><span class="glyphicon glyphicon-folder-open"></span>View/Edit Submitted Recipes</a></li>
+          <li><a href = "/users/<%=current_user.id%>/recipes/new"><span class="glyphicon glyphicon-cutlery"></span>Submit New Recipe </li>
+          <li><a href="/users/edit"><span class="glyphicon glyphicon-cog"></span>Account Info</a> </li>
+          <li><em>Current Allergies :</em>
+           <% current_user.allergies.each do |allergy| %>
+            <em><%=allergy.name %></em>
+            <%end%></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-xs-10 col-sm-9">
+      <h2>Edit Recipe</h2>
+      <%= render 'form'%>
+      <br>
+      <div class='btn btn-warning btn-lg'><%= link_to 'DELETE Recipe', recipe_path(@recipe), method: :delete, data: { confirm: 'Are you sure?' } %></div>
+   </div>
+  </div>
+</div>
+
+

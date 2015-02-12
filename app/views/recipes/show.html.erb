@@ -1,0 +1,81 @@
+<% content_for :javascript_includes do %>
+<%= javascript_include_tag 'jquery.raty.js','letsrate.js.'%>
+<% end %>
+
+<div class='container-fluid'>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="sidebar">
+        <h3><%=current_user.name ? current_user.name.titleize + '\'s' : Your%> Account</h3>
+        <ul>
+          <li><a href="/dashboard"><span class="glyphicon glyphicon-dashboard"></span>Dashboard</a></li>
+          <li><a href="/users/<%=current_user.id%>/recipes"><span class="glyphicon glyphicon-folder-open"></span>View/Edit Submitted Recipes</a></li>
+          <li><a href = "/users/<%=current_user.id%>/recipes/new"><span class="glyphicon glyphicon-cutlery"></span>Submit New Recipe </li>
+          <li><a href=" /users/edit"><span class="glyphicon glyphicon-cog"></span>Account Info</a> </li>
+          <li><em>Current Allergies :</em>
+           <% @current_user.allergies.each do |allergy| %>
+            <em><%=allergy.name %></em>
+            <%end%></li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="col-sm-3">
+    <section>
+    <%= image_tag @recipe.picture.url(:medium) %>
+    </div>
+    <div class="col-sm-6">
+      <h1 id="title"><%=@recipe.title.titleize%></h1>
+      <ul>
+        <li><%if @rating_exist && @recipe.rates("title").count > 0 %>
+             <h3><%=@recipe.average("title").avg.round(1)%><img src="/assets/mid-star.png"></h3>
+            <%else%>
+              <%= rating_for @recipe, "title", disable_after_rate: true %><%end%>
+        </li>
+        <li>Total Votes: <%= @recipe.rates("title").count %></li>
+        <li>Category: <%=@recipe.category.titleize%></li>
+        <li>Created/Submitted By: <%=User.find(@recipe.user_id).name.titleize%></li>
+        <li>Submittal Date: <%= @recipe.created_at.month%>/<%= @recipe.created_at.year%></li>
+        <li><% if current_user == User.find(@recipe.user_id)%>
+            <%= link_to edit_recipe_path(@recipe), class: "btn btn-default" do %>  <i class="glyphicon glyphicon-edit">Edit</i>
+            <%end%>
+            <%end%>
+          </li>
+      </ul>
+    </div>
+    </section>
+  </div>
+
+   <div class = 'row'>
+      <div class="col-sm-3">
+        <%= render '/comments/form'%>
+      </div>
+    <div class='col-sm-3'>
+      <ul><h3>Ingredients</h3>
+      <% @ingredients.each do |ingredient|%>
+        <li><%=ingredient%></li>
+        <%end%>
+      </ul>
+    </div>
+    <div class='col-sm-6'>
+     <h3> Directions</h3> <%=@recipe.directions%>
+    </div>
+  </div>
+    <div class = 'row'>
+      <div class='col-sm-9 col-sm-offset-3'>
+      <div class='notes_header'><h3 >Comments</h3>
+      </div> <ul>
+        <% if @recipe.comments.size > 1 %>
+          <li class='notes'><%= render @recipe.comments%></li>
+          <%end%>
+        </ul>
+        </div>
+         </div>
+      </div>
+     </div>
+    </div>
+
+
+
+
+

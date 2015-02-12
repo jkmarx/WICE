@@ -1,0 +1,2 @@
+module FoodflagsHelper
+end

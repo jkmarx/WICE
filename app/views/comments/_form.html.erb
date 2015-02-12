@@ -1,0 +1,13 @@
+<div class='form_note'>
+<%= form_for([@recipe, @recipe.comments.new]) do |f| %>
+
+  <div class="field_note">
+    <%= f.text_area :body, placeholder: "Leave New Comments", cols:25, rows:4 %>
+  </div>
+  <div class="field_exclaim">
+    <%= f.label :important %>
+    <%= f.check_box :important, :class=>"field_checkbox" %>
+  <%= f.submit class: 'btn btn-primary btn-sm' %>
+  </div>
+<% end %>
+</div>
