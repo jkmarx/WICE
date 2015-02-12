@@ -36,7 +36,6 @@ class Recipe < ActiveRecord::Base
 
       end
     end
-    byebug
     return @recipe_flags_ids
   end
 end
