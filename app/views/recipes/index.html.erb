@@ -9,9 +9,9 @@
           <li><strong><span class="glyphicon glyphicon-folder-open"></span>View/Edit Submitted Recipes</strong></li>
           <li><a href = "recipes/new"><span class="glyphicon glyphicon-cutlery"></span>Submit New Recipe </li>
           <li><a href=" /users/edit"><span class="glyphicon glyphicon-cog"></span>Account Info</a> </li>
-          <li><em>Current Allergies :</em>
+          <li><em>Current Allergies </em>
            <% @current_user.allergies.each do |allergy| %>
-            <em><%=allergy.name %></em>
+            <em>&nbsp; &#149;<%=allergy.name %></em>
             <%end%></li>
             </ul>
           </li>

@@ -8,9 +8,9 @@
           <li><a href="<%=current_user.id%>/recipes"><span class="glyphicon glyphicon-folder-open"></span>View/Edit Submitted Recipes</a></li>
           <li><a href = "<%=current_user.id%>/recipes/new"><span class="glyphicon glyphicon-cutlery"></span>Submit New Recipe</a> </li>
           <li> <strong><span class="glyphicon glyphicon-cog"></span>Account Info</strong> </li>
-          <li>Current Allergies :
+          <li>Current Allergies
            <% @current_user.allergies.each do |allergy| %>
-            <%=allergy.name %>
+            <em>&nbsp; &#149;<%=allergy.name %></em>
             <%end%></li>
         </ul>
       </div>

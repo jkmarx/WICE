@@ -8,9 +8,9 @@
           <li><a href="/users/<%=current_user.id%>/recipes"><span class="glyphicon glyphicon-folder-open"></span>View/Edit Submitted Recipes</a></li>
           <li><a href = "/users/<%=current_user.id%>/recipes/new"><span class="glyphicon glyphicon-cutlery"></span>Submit New Recipe </li>
           <li><a href="/users/edit"><span class="glyphicon glyphicon-cog"></span>Account Info</a> </li>
-          <li><em>Current Allergies :</em>
+          <li><em>Current Allergies </em>
            <% current_user.allergies.each do |allergy| %>
-            <em><%=allergy.name %></em>
+            <em>&nbsp; &#149;<%=allergy.name %></em>
             <%end%></li>
             </ul>
           </li>

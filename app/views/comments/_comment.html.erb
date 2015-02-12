@@ -3,9 +3,9 @@
 <div class='col-sm-12'>
 <% if comment.body %>
   <div class="comments">
-    <div id="exclaim" ><%= "!" if comment.important %></div>
+
     <ul>
-      <li>Created by: <%= comment.writer %><% if comment.body %><div id="comment" class='btn btn-warning btn-xs'> <%= link_to 'X', comment, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></div></li>
+      <li><span style="color:red"><% if comment.important %><span class="glyphicon glyphicon-flag"></span><%end%></span>Created by: <%= comment.writer %><% if comment.body %><div id="comment" class='btn btn-warning btn-xs'> <%= link_to 'X', comment, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></div></li>
       <li>Submitted: <%= comment.created_at.month%>/<%= comment.created_at.day%>/<%= comment.created_at.year%> </li>
       <li>Comments: <%= comment.body %></li>
     </ul>
