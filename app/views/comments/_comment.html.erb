@@ -5,7 +5,7 @@
   <div class="comments">
 
     <ul>
-      <li><span style="color:red"><% if comment.important %><span class="glyphicon glyphicon-flag"></span><%end%></span>Created by: <%= comment.writer %><% if comment.body %><div id="comment" class='btn btn-warning btn-xs'> <%= link_to 'X', comment, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></div></li>
+      <li><span style="color:red"><% if comment.important %><span class="glyphicon glyphicon-flag"></span><%end%></span>Created by: <%= comment.writer %><% if current_user == User.find(comment.user_id)%><% if comment.body %><div id="comment" class='btn btn-warning btn-xs'> <%= link_to 'X', comment, method: :delete, data: { confirm: 'Are you sure?' } %></div><%end%><%end%></li>
       <li>Submitted: <%= comment.created_at.month%>/<%= comment.created_at.day%>/<%= comment.created_at.year%> </li>
       <li>Comments: <%= comment.body %></li>
     </ul>
