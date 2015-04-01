@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   devise_for :users, paths:'users', :controllers => { registrations: 'registrations' }
   resources :welcome, only: :index
   # root 'welcome#index'
+  resources :about, only: :index
+  # root 'about#index'
 
   resources :dashboard, only: [:index,:edit]
   authenticated :user do
