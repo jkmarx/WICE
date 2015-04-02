@@ -15,6 +15,8 @@ class RecipesController < ApplicationController
     @ingredients = split_ingredients
     @allergens = @recipe.find_allergens
     @rating_exist = rating_exist.nil? ? false : true
+    @rating_for_user = rating_exist_user ? true : false
+
   end
 
   def create
@@ -66,7 +68,14 @@ class RecipesController < ApplicationController
   end
 
   def rating_exist
-    Rate.all.find_by(rater_id: current_user.id)
+    Rate.all.find_by(rateable_id: params[:id])
+  end
+
+  def rating_exist_user
+    flag = false
+    filteredRates = Rate.all.where(rateable_id: params[:id])
+    temp = filteredRates.map{|rate| rate.rater_id==current_user.id ? flag =true : 0}
+    return flag
   end
 
   def recipe_params

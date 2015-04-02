@@ -8,13 +8,13 @@
 </head>
 <body>
 
-<%= render 'layouts/header' %>
-<div class='container-fluid height-full'> <div class='pages'>
-  <%= flash_messages %>
-  <%= yield :javascript_includes %>
-  <%= yield %>
-</div>
-</div>
+  <%= render 'layouts/header' %>
+  <div class='container-fluid height-full'> <div class='pages'>
+    <%= flash_messages %>
+    <%= yield :javascript_includes %>
+    <%= yield %>
+  </div>
+  </div>
 
 </body>
 </html>

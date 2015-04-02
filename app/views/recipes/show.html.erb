@@ -27,7 +27,7 @@
     <div class="col-sm-6">
       <h1 id="title"><%=@recipe.title.titleize%></h1>
       <ul>
-        <li><%if @rating_exist && @recipe.rates("title").count > 0 %>
+        <li><%if @rating_exist %>
              <h3><%=@recipe.average("title").avg.round(1)%><img src="/assets/mid-star.png"></h3>
             <%else%>
               <%= rating_for @recipe, "title", disable_after_rate: true %><%end%>
@@ -41,7 +41,9 @@
             <%= link_to edit_recipe_path(@recipe), class: "btn btn-default" do %>  <i class="glyphicon glyphicon-edit">Edit</i>
             <%end%>
             <%end%>
-          </li>
+        </li>
+        <%if !@rating_for_user %>
+          <li>Add Your Vote<%=rating_for @recipe, "title", disable_after_rate: true %></li><%end%>
       </ul>
     </div>
     </section>
