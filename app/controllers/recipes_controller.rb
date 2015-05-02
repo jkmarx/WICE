@@ -12,6 +12,7 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @current_user = current_user
     @ingredients = split_ingredients
     @allergens = @recipe.find_allergens
     @rating_exist = rating_exist.nil? ? false : true
