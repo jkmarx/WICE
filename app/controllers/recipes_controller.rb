@@ -21,9 +21,11 @@ class RecipesController < ApplicationController
   end
 
   def create
+    byebug;
     @recipe = @user.recipes.new(recipe_params)
     @recipe_flagged = @recipe.flagged_ingredients()
     @recipe.ingredientflag_ids = @recipe_flagged unless @recipe_flagged.empty?
+    byebug;
     if @recipe.save
       flash[:success] = 'Recipe successfully created.'
       redirect_to user_recipes_path(@user)
@@ -80,7 +82,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:picture, :title, :ingredients, :category, :directions, :user_id, { ingredientflag_ids:[] })
+    params.require(:recipe).permit(:picture, :title, :ingredients, :category, :directions, :user_id, ingredientflag_ids:[])
   end
 
 end
